@@ -102,6 +102,8 @@ bot:
               headers:
                 "X-Authorization": "$.ENV.MY_VARIABLE"
                 "Content-Type": "application/json"
+              variables:
+                "escaped_username": "fn::json_str_encode($.message.sender.name)"
               content: |-
                 {
                   "greeted": "$.message.sender.id"

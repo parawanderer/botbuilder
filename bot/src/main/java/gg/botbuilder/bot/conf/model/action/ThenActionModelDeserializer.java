@@ -31,7 +31,7 @@ public class ThenActionModelDeserializer extends StdDeserializer<IThenActionArgu
         return switch(type) {
             case SEND_MESSAGE -> SendMessageActionModel.class;
             case LOG -> LogActionModel.class;
-            case ROLE_ADD -> RoleAddActionModel.class;
+            case ROLE_ADD -> RoleManageActionModel.class;
             case WEBHOOK -> WebhookActionModel.class;
             default -> throw new UnsupportedOperationException("No mapped model for " + type);
         };

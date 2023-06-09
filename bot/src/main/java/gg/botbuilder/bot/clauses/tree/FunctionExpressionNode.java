@@ -46,4 +46,12 @@ public class FunctionExpressionNode implements IConditionNode {
     public static FunctionExpressionNode regex(String jsonQuery, String equalToWhat) {
         return new FunctionExpressionNode(CLAUSE_FUNCTION.REGEX, jsonQuery, equalToWhat);
     }
+
+    @Override
+    public String toString() {
+        return operator.toLowerCase() + "(" +
+                subjectJsonQuery + ","  +
+                functionInput +
+                ')';
+    }
 }

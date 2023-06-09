@@ -50,4 +50,9 @@ public class LogicalExpressionNode implements IConditionNode {
     public static LogicalExpressionNode not(@NonNull IConditionNode child) {
         return new LogicalExpressionNode(CLAUSE_LOGICAL_OPERATOR.NOT, List.of(child));
     }
+
+    @Override
+    public String toString() {
+        return expression.toLowerCase() + "(" + children + ')';
+    }
 }

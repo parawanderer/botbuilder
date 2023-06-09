@@ -12,4 +12,9 @@ public class ClauseTreeRoot {
     @Getter
     @NonNull
     private final IConditionNode root;
+
+    @Override
+    public String toString() {
+        return "ClauseTreeRoot{" + root + "}";
+    }
 }

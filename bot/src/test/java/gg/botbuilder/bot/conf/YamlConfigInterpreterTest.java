@@ -84,9 +84,9 @@ public class YamlConfigInterpreterTest {
         assertNotNull( where.get().getRoot()); // test the expression tree generation separately somewhere....
         var then = event.getThen();
         assertNotNull(then);
-        assertEquals(5, then.size());
+        assertEquals(6, then.size());
         assertEquals(
-                List.of(DISCORD_ACTION_TYPE.REPLY, DISCORD_ACTION_TYPE.SEND_MESSAGE, DISCORD_ACTION_TYPE.LOG, DISCORD_ACTION_TYPE.ROLE_ADD, DISCORD_ACTION_TYPE.WEBHOOK),
+                List.of(DISCORD_ACTION_TYPE.SEND_MESSAGE, DISCORD_ACTION_TYPE.SEND_MESSAGE, DISCORD_ACTION_TYPE.LOG, DISCORD_ACTION_TYPE.NOP, DISCORD_ACTION_TYPE.ROLE_ADD, DISCORD_ACTION_TYPE.WEBHOOK),
                 then.stream().map(DiscordThenActionModel::getActionType).collect(Collectors.toList())
         );
     }
