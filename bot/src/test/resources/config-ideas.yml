@@ -1,0 +1,127 @@
+bot:
+  version: "0.0.1"
+  customisation:
+    name: "My Bot"
+    profilePictureUrl: "https://s3-link-goes-here"
+    status: "watermark by default else custom"
+  modules: # enabled modules
+    list:
+      - midjourney
+      - crypto
+      - chatgpt
+      - minecraft-server
+      - authentication
+      - calculator
+  config:
+    variables:
+      "MY_VARIABLE": "poop sock"
+      "SOME_TOKEN": "aaaa"
+    # declarations for code behaviour
+    discord:
+      events:
+        - on: "message-read" # fixed choice of events
+          where:
+            # free for all inside this
+            and:
+              - eq:
+                  - "$.message.server.id"
+                  - "1081879642513866762"
+              - eq:
+                  - "$.message.channel.id"
+                  - "1081879643168194562"
+              - or:
+                  - eq:
+                      - "$.message.sender.rank"
+                      - "1114649835484745749"
+                  - eq:
+                      - "$.message.sender.id"
+                      - "192148309123530753"
+          then:
+            # semi-structured in the sense that you can define one or more actions
+            # there will be variables corresponding to actions that you can use in the templates
+            # maybe functions too?
+#            - do: "reply"
+#              where:
+#                not:
+#                  eq:
+#                    - "$.message.sender.id"
+#                    - "192148309123530753"
+#              args:
+#                content: "hello, $.message.sender.at we are in $.message.channel.at!" # as opposed to 'send_message'
+#            - do: "reply"
+#              where:
+#                not:
+#                  eq:
+#                    - "$.message.sender.id"
+#                    - "192148309123530753"
+            - do: "send-message"
+              where:
+                not:
+                  eq:
+                    - "$.message.sender.id"
+                    - "192148309123530753"
+              server: "$.message.server.id" # must be available, of course
+              channel: "$.message.channel.id" # must be available, of course
+              content: "hello, $.message.sender.at we are in $.message.channel.at!"
+
+            - do: "send-message"
+              server: "1081879642513866762" # must be available, of course
+              channel: "1114618181621911703" # must be available, of course
+              content: "I see that $.message.sender.at sent a message in $.message.channel.at in our server $.message.server.at"
+
+            - do: "log"
+              id: "log-1" # optional, for building dependencies
+              content: "sent hello message to $.message.sender.id"
+              variables:
+                "my_var": "fn::random(1,3)" # creates $.local.my_var with value of evaluated expression
+              where:
+                not:
+                  eq:
+                    - "$.message.sender.id"
+                    - "192148309123530753"
+            - do: "nop"
+              id: "nop-2"
+              require: ["log-1"] # require some other response event(s)
+              variables: # variables are executed before where is executed!
+                "my_var2": "bar"
+              where:
+                eq:
+                  - "$.local.my_var" # we can reference previously generated variables here
+                  - "2"
+
+
+            - do: "role-add"
+              role: "12345678"
+              member: "$.message.sender.id"
+              server: "$.message.server.id"
+            - do: "webhook"
+              # mostly structured, I guess this could be a list too...
+              # let's only support json for now
+              method: POST
+              target: "http://127.0.0.1:8080/message"
+              headers:
+                "X-Authorization": "$.ENV.MY_VARIABLE"
+                "Content-Type": "application/json"
+              content: |-
+                {
+                  "greeted": "$.message.sender.id"
+                }
+
+#      commands:
+#        "/cmdname":
+#          # action definition, using python maybe?
+#      on-message:
+#        "when: channel_name == 'foo'":
+#          # action definition, using python maybe?
+#      reactions:
+#        "on user banned":
+#            do: "post message"
+#        "on user join server":
+#          do: "module:authentication.do_authentication()"
+#    external:
+#      webhooks:
+#        "https://botbuilder.gg/somewebhookpathrandomlygenerated":
+#          do: "post message"
+#    schedules:
+#      "*/1 * * * *":
+#        do: "poll:webpage"
