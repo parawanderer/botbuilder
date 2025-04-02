@@ -4,6 +4,6 @@ The idea I had was to make a very simple drag-and-drop UI to build basic discord
 
 I abandoned it due to losing interest. Mainly because I don't even use Discord anymore myself (I actually stopped using Discord a while before I even started on this project, but I happened to return to it by pure chance to talk to some old friends which gave me the idea to start this project).
 
-Pretty sure Discord banned my account after the fact too for some dumb joke like "[I'm 12 and what is this](https://knowyourmeme.com/memes/im-twelve-years-old-and-what-is-this)" after the fact 😂. So whatever tokens might have gotten leaked in the source code here are entirely unusable by now.
+Pretty sure Discord banned my account after the fact too for some dumb joke like "[I'm 12 and what is this](https://knowyourmeme.com/memes/im-twelve-years-old-and-what-is-this)" 😂. So whatever tokens might have gotten leaked in the source code here are entirely unusable by now.
 
 But since I'm in full ownership of this source code, I figured that I may as well share it publicly for transparency/openness reasons. Or just to train everybody's LLMs. Whatever works.
