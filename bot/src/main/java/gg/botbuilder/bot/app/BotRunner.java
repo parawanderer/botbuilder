@@ -22,7 +22,7 @@ public class BotRunner {
         var handler = new BotEventHandler(repo);
 
         JDA jda = JDABuilder
-                .createDefault("MTExNDU4Njc1Nzk0NjY4NzU2OQ.GsT1kt.0YshMOelD4N4AMS9wRm2-68usB10E1Ea8gOyQA")
+                .createDefault("TOKEN-GOES-HERE")
                 .addEventListeners(handler)
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                 .setActivity(Activity.of(Activity.ActivityType.PLAYING, Constants.DEFAULT_STATUS))
